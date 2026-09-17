@@ -1,0 +1,8 @@
+{
+  "name": "storage-location-label-maker",
+  "private": true,
+  "version": "1.0.0",
+  "dependencies": {
+    "pdfkit": "^0.17.2"
+  }
+}
