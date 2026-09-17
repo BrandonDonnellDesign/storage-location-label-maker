@@ -1,6 +1,6 @@
 # Storage Location Label Maker
 
-A simple, self-contained browser app for turning storage locations into 4 × 6 inch Code 128 labels.
+Browser-based 4 × 6 inch storage-location label maker with Code 128-B barcodes.
 
 ## Features
 
@@ -8,18 +8,20 @@ A simple, self-contained browser app for turning storage locations into 4 × 6 i
 - Live label preview
 - Code 128-B barcodes
 - Generate multiple labels at once
-- Download a real 4 × 6 inch PDF, one label per page
-- No server, database, login, or external JavaScript libraries required
-- Works as a static site on Vercel, Netlify, or GitHub Pages
+- Open a normal 4 × 6 label page
+- Generate a server-side 4 × 6 PDF through Vercel
+- No browser PDF blobs and no automatic `window.print()` call
 
-## Printing
+## Work computers
 
-The app intentionally does **not** call the browser's `window.print()` API. Some managed/work browsers block programmatic print operations. Instead, click **Download 4×6 PDF**, open the downloaded PDF, and print it from your PDF viewer at **100% / Actual Size** with the printer's media set to 4 × 6 inches.
+The **Generate 4×6 PDF** button sends only the entered label text to the Vercel server function at `/api/generate-pdf`. The server creates the PDF with PDFKit and returns a normal PDF response. This avoids browser-side PDF generation and programmatic printing, which can be restricted by managed workstation security software.
+
+The **Open 4×6 Labels** button remains available as a browser-only fallback.
 
 ## Supported characters
 
 Code 128-B supports printable ASCII characters. For best results, use letters, numbers, spaces, and standard punctuation in storage locations.
 
-## Development
+## Deployment
 
-There is no build step. Open `index.html` directly in a browser or serve the folder with any static web server.
+The project is deployed on Vercel. Vercel installs the `pdfkit` dependency from `package.json` and exposes `api/generate-pdf.js` as the PDF endpoint.
